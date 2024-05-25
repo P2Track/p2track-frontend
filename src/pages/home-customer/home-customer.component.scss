@@ -1,0 +1,28 @@
+.customer-page{
+  
+  .mat-form {
+    width: 100%;
+  }
+
+.form {
+    width: 50%;
+    padding-top: 15%;
+    padding-left: 25%;
+}
+
+.hint-message{
+  padding-top: 1.5%;
+  font-size: 25px;
+}
+
+.input-and-button{
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+}
+.send-button{
+  margin-top: 13.8%;
+  width: 5%;
+}
+
+}

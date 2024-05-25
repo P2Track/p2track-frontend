@@ -1,0 +1,44 @@
+<h2 class="title-detail" mat-dialog-title>Detalhes do pedido</h2>
+<mat-dialog-content>
+    
+    <div class="field">
+        <p class="field-name">Código de Rastreio:</p>
+        <p class="field-data"> {{ data.trackingCode }}</p>
+    </div>
+
+    <div class="field">
+        <p class="field-name">Data do pedido:</p>
+        <p class="field-data"> {{ data.orderDate }}</p>
+    </div>
+
+    <div class="field">
+        <p class="field-name">Status do Pedido:</p>
+        <p class="field-data"> {{ data.orderStatus }}</p>
+    </div>
+
+    <div class="field">
+        <p class="field-name">Endereço de Entrega:</p>
+        <p class="field-data"> {{ data.deliveryAddress }}</p>
+    </div>
+
+    <div class="field">
+        <p class="field-name">Data Estimada de Entrega:</p>
+        <p class="field-data"> {{ data.deliveryEstimation }}</p>
+    </div>
+
+    <div class="field">
+        <p class="field-name">Nome do Produto:</p>
+        <p class="field-data"> {{ data.productName }}</p>
+    </div>
+
+    <div class="field">
+        <p class="field-name">Quantidade:</p>
+        <p class="field-data"> {{ data.quantity }}</p>
+    </div>
+
+    <div class="field">
+        <p class="field-name">Valor Total da Compra:</p>
+        <p class="field-data"> {{ data.totalPrice }}</p>
+    </div>
+  
+</mat-dialog-content>
