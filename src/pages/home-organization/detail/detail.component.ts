@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IOrderDetail } from '../../../shared/interfaces/order-detail.interface';
+import { EorderStatus } from '../../../shared/enum/order-status.enum';
 import { statusTranslations } from '../../../assets/pt-br/pt-br';
 
 @Component({
@@ -10,7 +11,12 @@ import { statusTranslations } from '../../../assets/pt-br/pt-br';
 })
 export class DetailComponent {
 
+  statusOptions =  Object.keys(EorderStatus);
+
   translations = statusTranslations;
-  
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IOrderDetail) {}
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: IOrderDetail[],
+     ){
+  }
+
 }

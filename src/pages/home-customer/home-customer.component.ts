@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailComponent } from './detail/detail.component';
-import { orderStatus } from '../../shared/enum/order-status.enum';
+import { EorderStatus } from '../../shared/enum/order-status.enum';
 import {v4 as uuidv4} from 'uuid';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home-customer',
@@ -11,7 +12,17 @@ import {v4 as uuidv4} from 'uuid';
 })
 export class HomeCustomerComponent {
 
-  constructor(public dialog: MatDialog){}
+  formGroup!: FormGroup;
+
+  constructor(public dialog: MatDialog,
+    private formBuilder: FormBuilder
+  ){}
+
+  ngOnInit(){
+    this.formGroup = this.formBuilder.group({
+      trackingCode: ['', Validators.required]
+    });
+  }
 
   openDialog() {
     this.dialog.open(DetailComponent, {
@@ -19,7 +30,7 @@ export class HomeCustomerComponent {
       data: {
         trackingCode: uuidv4(),
         orderDate: new Date(),
-        orderStatus: orderStatus.DELIVERED,
+        orderStatus: EorderStatus.DELIVERED,
         deliveryAddress: 'Avenida Darcy Vargas',
         deliveryEstimation: new Date(),
         productName: 'Samsung Galaxy',

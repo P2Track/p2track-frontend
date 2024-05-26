@@ -1,0 +1,43 @@
+
+<div class="register-dialog">
+    <h2 mat-dialog-title>Registro de encomenda</h2>
+    <mat-dialog-content>Preencha os campos abaixo para efetuar o registro.
+    <form [formGroup]="formGroup">
+
+        <mat-form-field class="field">
+            <mat-label>Nome do Produto</mat-label>
+            <input formControlName="name" matInput placeholder="Digite o nome do produto">
+        </mat-form-field>
+
+        <mat-form-field class="field">
+            <mat-label>Endereço de Entrega</mat-label>
+            <input formControlName="address" matInput placeholder="Digite o endereço de entrega">
+        </mat-form-field>
+
+        <mat-form-field class="field">
+            <mat-label>Data Estimada de Entrega</mat-label>
+            <input formControlName="estimatedDate" matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="field" floatLabel="always">
+            <mat-label>Quantidade</mat-label>
+            <input formControlName="quantity" matInput type="number" placeholder="0">
+        </mat-form-field>
+
+        <mat-form-field class="field" floatLabel="always">
+            <mat-label>Valor Total</mat-label>
+            <input formControlName="totalPrice" matInput type="number" placeholder="0">
+            <span matTextPrefix>R$&nbsp;</span>
+        </mat-form-field>
+
+    </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+    <button [disabled]="!formGroup.valid" mat-button mat-dialog-close>Registrar</button>
+    <button mat-button mat-dialog-close>Fechar</button>
+    </mat-dialog-actions>
+</div>
+

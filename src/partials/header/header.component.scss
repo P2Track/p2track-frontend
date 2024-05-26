@@ -1,0 +1,21 @@
+.header{
+    width: 20%;
+    height: 15%;
+    padding: 0% 40% 0% 40%;
+    background-color: rgb(229, 155, 35);
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: space-around;
+    
+    .img{
+        width: 4.5rem;
+        cursor: pointer;
+    }
+
+    h1{
+        font-size: 4.5rem;
+        padding-top: 10%;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,62 @@
+
+<div>
+    <h2 mat-dialog-title>Visualização Histórico</h2>
+    <mat-dialog-content>
+
+        <div *ngFor="let register of data; let i = index" class="cards-container">
+
+            <mat-card class="card">
+
+                <div class="field">
+                    <p class="field-name">Código de Rastreio:</p>
+                    <p class="field-data"> {{ data[i].trackingCode }}</p>
+                </div>
+            
+                <div class="field">
+                    <p class="field-name">Data do pedido:</p>
+                    <p class="field-data"> {{ data[i].orderDate }}</p>
+                </div>
+            
+                <div class="field">
+                    <p class="field-name">Status do Pedido:</p>
+                    <p class="field-data"> {{ translations[data[i].orderStatus] }}</p>
+                </div>
+            
+                <div class="field">
+                    <p class="field-name">Endereço de Entrega:</p>
+                    <p class="field-data"> {{ data[i].deliveryAddress }}</p>
+                </div>
+            
+                <div class="field">
+                    <p class="field-name">Data Estimada de Entrega:</p>
+                    <p class="field-data"> {{ data[i].deliveryEstimation }}</p>
+                </div>
+            
+                <div class="field">
+                    <p class="field-name">Nome do Produto:</p>
+                    <p class="field-data"> {{ data[i].productName }}</p>
+                </div>
+            
+                <div class="field">
+                    <p class="field-name">Quantidade:</p>
+                    <p class="field-data"> {{ data[i].quantity }}</p>
+                </div>
+            
+                <div class="field">
+                    <p class="field-name">Valor Total da Compra:</p>
+                    <p class="field-data"> {{ data[i].totalPrice }}</p>
+                </div>
+            </mat-card>
+
+        </div>
+
+    
+    </mat-dialog-content>
+    <mat-dialog-actions class="actions">
+    <mat-select class="select" [placeholder]="'Status'">
+        <mat-option *ngFor="let option of statusOptions" [value]="option">{{ translations[option] }}</mat-option>
+    </mat-select>
+    <button mat-button mat-dialog-close>Fechar</button>
+    </mat-dialog-actions>
+</div>
+

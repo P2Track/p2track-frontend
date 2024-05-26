@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DetailComponent } from './detail/detail.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,6 +24,8 @@ import { DetailComponent } from './detail/detail.component';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class HomeCustomerModule { }
