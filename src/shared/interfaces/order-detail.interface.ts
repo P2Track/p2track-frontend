@@ -2,7 +2,7 @@ import { UUID } from "crypto";
 import { EorderStatus } from "../enum/order-status.enum";
 
 export interface IOrderDetail {
-    trackingCode: UUID,
+    trackingCode: string,
     orderDate: Date,
     orderStatus: EorderStatus,
     deliveryAddress: string,

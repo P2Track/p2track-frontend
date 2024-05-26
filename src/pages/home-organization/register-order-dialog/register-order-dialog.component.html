@@ -15,11 +15,19 @@
         </mat-form-field>
 
         <mat-form-field class="field">
-            <mat-label>Data Estimada de Entrega</mat-label>
-            <input formControlName="estimatedDate" matInput [matDatepicker]="picker">
+            <mat-label>Data do Pedido</mat-label>
+            <input formControlName="orderDate" matInput [matDatepicker]="orderPicker">
             <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker-toggle matIconSuffix [for]="orderPicker"></mat-datepicker-toggle>
+            <mat-datepicker #orderPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="field">
+            <mat-label>Data Estimada de Entrega</mat-label>
+            <input formControlName="estimatedDate" matInput [matDatepicker]="estimatedPicker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="estimatedPicker"></mat-datepicker-toggle>
+            <mat-datepicker #estimatedPicker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field class="field" floatLabel="always">
@@ -36,7 +44,7 @@
     </form>
     </mat-dialog-content>
     <mat-dialog-actions>
-    <button [disabled]="!formGroup.valid" mat-button mat-dialog-close>Registrar</button>
+    <button (click)="registerOrder()" [disabled]="!formGroup.valid" mat-button mat-dialog-close>Registrar</button>
     <button mat-button mat-dialog-close>Fechar</button>
     </mat-dialog-actions>
 </div>
