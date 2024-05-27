@@ -1,8 +1,8 @@
 
 <div>
     <h2 mat-dialog-title>Visualização Histórico</h2>
+    <form [formGroup]="formGroup">
     <mat-dialog-content>
-
         <div *ngFor="let register of data; let i = index" class="cards-container">
 
             <mat-card class="card">
@@ -46,6 +46,12 @@
                     <p class="field-name">Valor Total da Compra:</p>
                     <p class="field-data"> {{ data[i].totalPrice }}</p>
                 </div>
+
+                <div class="field">
+                    <p class="field-name">Última atualização:</p>
+                    <p class="field-data"> {{ data[i].lastUpdate }}</p>
+                </div>
+
             </mat-card>
 
         </div>
@@ -53,10 +59,11 @@
     
     </mat-dialog-content>
     <mat-dialog-actions class="actions">
-    <mat-select class="select" [placeholder]="'Status'">
+    <mat-select class="select" [placeholder]="'Alterar Status'" formControlName="status">
         <mat-option *ngFor="let option of statusOptions" [value]="option">{{ translations[option] }}</mat-option>
     </mat-select>
-    <button mat-button mat-dialog-close>Fechar</button>
+    <button (click)="registerUpdatedStatus()" mat-button mat-dialog-close>Fechar</button>
     </mat-dialog-actions>
+    </form>
 </div>
 

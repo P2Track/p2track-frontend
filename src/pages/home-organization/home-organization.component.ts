@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DetailComponent } from './detail/detail.component';
 import { statusTranslations } from '../../assets/pt-br/pt-br';
 import { OrderService } from '../../services/order_service';
+import { UUID } from 'crypto';
 
 export interface FilterData {
   trackingCode: string;
@@ -25,36 +26,17 @@ export class HomeOrganizationComponent {
   displayedColumns: string[] = ['trackingCode', 'name', 'status', 'actions'];
   dataSource: MatTableDataSource<FilterData>;
   translations = statusTranslations;
+  history!: Object[];
 
   constructor(public dialog: MatDialog,
     private orderService: OrderService
   ) {
     this.dataSource = new MatTableDataSource();
-    this.loadData();
+    this.loadTableData();
   }
 
   openRegisterOrderDialog() {
     this.dialog.open(RegisterOrderDialogComponent);
-  }
-
-  openDetailDialog() {
-    this.dialog.open(DetailComponent, {
-      width: '30%',
-      data: [{
-        trackingCode: uuidv4(), orderDate: new Date(), orderStatus: EorderStatus.DELIVERED,
-        deliveryAddress: 'Avenida Darcy Vargas', deliveryEstimation: new Date(), productName: 'Samsung Galaxy',
-        quantity: 1, totalPrice: 2000, lastUpdate: new Date(),
-      }, {
-        trackingCode: uuidv4(), orderDate: new Date(), orderStatus: EorderStatus.DELIVERED,
-        deliveryAddress: 'Avenida Darcy Vargas', deliveryEstimation: new Date(), productName: 'Samsung Galaxy',
-        quantity: 1, totalPrice: 2000, lastUpdate: new Date(),
-      }, {
-        trackingCode: uuidv4(), orderDate: new Date(), orderStatus: EorderStatus.DELIVERED,
-        deliveryAddress: 'Avenida Darcy Vargas', deliveryEstimation: new Date(), productName: 'Samsung Galaxy',
-        quantity: 1, totalPrice: 2000, lastUpdate: new Date(),
-      },
-      ],
-    });
   }
 
   applyFilter(event: Event) {
@@ -66,7 +48,7 @@ export class HomeOrganizationComponent {
     }
   }
 
-  loadData() {
+  loadTableData() {
     this.orderService.getData().subscribe((data) => {
       for (let i = 1; i < data.data.length; i++) {
         console.log(data)
@@ -77,6 +59,22 @@ export class HomeOrganizationComponent {
         })
     }
     })
+  }
+
+  loadHistoryData(trackingCode: UUID): void {
+    this.orderService.getAllById(trackingCode).subscribe((data) => {
+      this.history = data.data;
+      console.log(this.history);
+      this.openDetailDialogWithData();
+    });
+  }
+
+  openDetailDialogWithData() {
+    console.log(this.history);
+    this.dialog.open(DetailComponent, {
+      width: '30%',
+      data: this.history
+    });
   }
 
 }

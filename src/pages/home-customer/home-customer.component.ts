@@ -4,6 +4,9 @@ import { DetailComponent } from './detail/detail.component';
 import { EorderStatus } from '../../shared/enum/order-status.enum';
 import {v4 as uuidv4} from 'uuid';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OrderService } from '../../services/order_service';
+import { UUID } from 'crypto';
+import { IOrderDetail } from '../../shared/interfaces/order-detail.interface';
 
 @Component({
   selector: 'app-home-customer',
@@ -15,7 +18,8 @@ export class HomeCustomerComponent {
   formGroup!: FormGroup;
 
   constructor(public dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private orderService: OrderService
   ){}
 
   ngOnInit(){
@@ -24,21 +28,17 @@ export class HomeCustomerComponent {
     });
   }
 
-  openDialog() {
+  openDialog(data: IOrderDetail) {
     this.dialog.open(DetailComponent, {
       width: '30%',
-      data: {
-        trackingCode: uuidv4(),
-        orderDate: new Date(),
-        orderStatus: EorderStatus.DELIVERED,
-        deliveryAddress: 'Avenida Darcy Vargas',
-        deliveryEstimation: new Date(),
-        productName: 'Samsung Galaxy',
-        quantity: 1,
-        totalPrice: 2000,
-        lastUpdate: new Date(),
-      },
+      data: data,
     });
+  }
+
+  loadUpdated(trackingCode: UUID): void {
+    this.orderService.getUpdatedById(trackingCode).subscribe((data) => {
+      this.openDialog(data.data)
+    })
   }
 
 }

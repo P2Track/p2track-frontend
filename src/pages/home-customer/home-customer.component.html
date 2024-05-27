@@ -11,7 +11,7 @@
     </mat-form-field>
 </form>
 
-<button [disabled]="!formGroup.valid" mat-fab class="send-button" color="primary" (click)="openDialog()">
+<button [disabled]="!formGroup.valid" mat-fab class="send-button" color="primary" (click)="loadUpdated(formGroup.get('trackingCode')?.value)">
   <mat-icon>arrow_forward_ios</mat-icon>
 </button>
 </div>

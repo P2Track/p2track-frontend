@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IOrderDetail } from '../shared/interfaces/order-detail.interface';
+import { UUID } from 'crypto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,11 @@ export class OrderService {
     return this.http.post(`${this.baseUrl}/post_package`, data);
   }
 
-  updateData(id: number, data: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/data/${id}`, data);
+  getAllById(trackingCode: UUID): Observable<any> {
+    return this.http.get(`${this.baseUrl}/get_all_packages/${trackingCode}`);
   }
 
-  deleteData(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/data/${id}`);
+  getUpdatedById(trackingCode: UUID): Observable<any> {
+    return this.http.get(`${this.baseUrl}/get_package/${trackingCode}/updated`);
   }
 }
