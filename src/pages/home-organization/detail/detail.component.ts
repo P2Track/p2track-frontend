@@ -19,13 +19,14 @@ export class DetailComponent {
 
   translations = statusTranslations;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IOrderDetail[],
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   private formBuilder: FormBuilder,
   private orderService: OrderService
      ){
       this.formGroup = this.formBuilder.group({
         status: ['', Validators.required]
       });
+      console.log(typeof data);
   }
 
   ngAfterContentInit(): void {
@@ -36,21 +37,11 @@ export class DetailComponent {
 
   registerUpdatedStatus(): void {
     if (this.formGroup.get('status')?.value !== ''){
-      this.orderService.registerOrder(
-        {
-          trackingCode: this.data[this.data.length - 1].trackingCode,
-          orderDate: this.data[this.data.length - 1].orderDate,
-          orderStatus: this.formGroup.get('status')?.value,
-          deliveryAddress: this.data[this.data.length - 1].deliveryAddress,
-          deliveryEstimation: this.data[this.data.length - 1].deliveryEstimation,
-          productName: this.data[this.data.length - 1].productName,
-          quantity: this.data[this.data.length - 1].quantity,
-          totalPrice: this.data[this.data.length - 1].totalPrice,
-          lastUpdate: new Date()
-        }
-        ).subscribe( (data) => {
-          console.log(data);
-      })
+      this.orderService.updateOrderStatus(
+          this.data[0],
+          this.formGroup.get('status')?.value,
+          String(new Date())
+        )
     }
   }
 

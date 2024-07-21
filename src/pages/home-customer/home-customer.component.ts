@@ -35,10 +35,9 @@ export class HomeCustomerComponent {
     });
   }
 
-  loadUpdated(trackingCode: UUID): void {
-    this.orderService.getUpdatedById(trackingCode).subscribe((data) => {
-      this.openDialog(data.data)
-    })
+  async loadUpdated(trackingCode: UUID): Promise<void> {
+    const data = await this.orderService.getPackageByTrackingCode(trackingCode)
+      this.openDialog(data)
   }
 
 }

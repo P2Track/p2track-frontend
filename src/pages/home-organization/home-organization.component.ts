@@ -1,37 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import {v4 as uuidv4} from 'uuid';
-import { EorderStatus } from '../../shared/enum/order-status.enum';
 import { RegisterOrderDialogComponent } from './register-order-dialog/register-order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailComponent } from './detail/detail.component';
 import { statusTranslations } from '../../assets/pt-br/pt-br';
 import { OrderService } from '../../services/order_service';
-import { UUID } from 'crypto';
+import { IOrderDetail } from '../../shared/interfaces/order-detail.interface';
 
 export interface FilterData {
   trackingCode: string;
   name: string;
-  status: EorderStatus;
+  status: string; // Use string to store the translated status
 }
-
 
 @Component({
   selector: 'app-home-organization',
   templateUrl: './home-organization.component.html',
-  styleUrl: './home-organization.component.scss'
+  styleUrls: ['./home-organization.component.scss']
 })
-export class HomeOrganizationComponent {
+export class HomeOrganizationComponent implements OnInit {
 
   displayedColumns: string[] = ['trackingCode', 'name', 'status', 'actions'];
   dataSource: MatTableDataSource<FilterData>;
   translations = statusTranslations;
   history!: Object[];
 
-  constructor(public dialog: MatDialog,
-    private orderService: OrderService
-  ) {
+  constructor(public dialog: MatDialog, private orderService: OrderService) {
     this.dataSource = new MatTableDataSource();
+  }
+
+  ngOnInit() {
     this.loadTableData();
   }
 
@@ -48,34 +46,34 @@ export class HomeOrganizationComponent {
     }
   }
 
-  loadTableData() {
-    this.orderService.getData().subscribe((data) => {
-      for (let i = 1; i < data.data.length; i++) {
-        console.log(data)
-        this.dataSource.data.push({
-          trackingCode: data.data[i].trackingCode,
-          name: data.data[i].productName,
-          status: data.data[i].orderStatus,
-        })
+  async loadTableData() {
+    try {
+      const data: IOrderDetail[] = await this.orderService.getPackages();
+      const filterData: FilterData[] = data.map(order => ({
+        trackingCode: order.trackingCode,
+        name: order.productName,
+        status: this.translations[order.orderStatus] || order.orderStatus
+      }));
+      this.dataSource.data = filterData;
+    } catch (error) {
+      console.error('Error loading table data:', error);
     }
-    })
   }
 
-  loadHistoryData(trackingCode: UUID): void {
-    this.orderService.getAllById(trackingCode).subscribe((data) => {
-      this.history = data.data;
-      console.log(this.history);
+  async loadHistoryData(trackingCode: string): Promise<void> {
+    try {
+      const data = await this.orderService.getPackageByTrackingCode(trackingCode);
+      this.history = data;
       this.openDetailDialogWithData();
-    });
+    } catch (error) {
+      console.error('Error loading history data:', error);
+    }
   }
 
   openDetailDialogWithData() {
-    console.log(this.history);
     this.dialog.open(DetailComponent, {
       width: '30%',
       data: this.history
     });
   }
-
 }
-

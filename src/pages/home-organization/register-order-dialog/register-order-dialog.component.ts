@@ -30,7 +30,7 @@ export class RegisterOrderDialogComponent {
 
   registerOrder()
   {
-    this.orderService.registerOrder(
+    this.orderService.createPackage(
       {
         trackingCode: uuidv4(),
         orderDate: this.formGroup.get('orderDate')?.value,
@@ -42,9 +42,7 @@ export class RegisterOrderDialogComponent {
         totalPrice: this.formGroup.get('totalPrice')?.value,
         lastUpdate: new Date()
       }
-    ).subscribe(data => {
-      console.log(data);
-    })
+    )
   }
 }
 

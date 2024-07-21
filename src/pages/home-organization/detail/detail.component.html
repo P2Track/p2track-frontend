@@ -3,53 +3,53 @@
     <h2 mat-dialog-title>Visualização Histórico</h2>
     <form [formGroup]="formGroup">
     <mat-dialog-content>
-        <div *ngFor="let register of data; let i = index" class="cards-container">
+        <div class="cards-container">
 
             <mat-card class="card">
 
                 <div class="field">
                     <p class="field-name">Código de Rastreio:</p>
-                    <p class="field-data"> {{ data[i].trackingCode }}</p>
+                    <p class="field-data"> {{ data[0] }}</p>
                 </div>
             
                 <div class="field">
                     <p class="field-name">Data do pedido:</p>
-                    <p class="field-data"> {{ data[i].orderDate }}</p>
+                    <p class="field-data"> {{ data[1] }}</p>
                 </div>
             
                 <div class="field">
                     <p class="field-name">Status do Pedido:</p>
-                    <p class="field-data"> {{ translations[data[i].orderStatus] }}</p>
+                    <p class="field-data"> {{ translations[data[2]] }}</p>
                 </div>
             
                 <div class="field">
                     <p class="field-name">Endereço de Entrega:</p>
-                    <p class="field-data"> {{ data[i].deliveryAddress }}</p>
+                    <p class="field-data"> {{ data[3]}}</p>
                 </div>
             
                 <div class="field">
                     <p class="field-name">Data Estimada de Entrega:</p>
-                    <p class="field-data"> {{ data[i].deliveryEstimation }}</p>
+                    <p class="field-data"> {{ data[4] }}</p>
                 </div>
             
                 <div class="field">
                     <p class="field-name">Nome do Produto:</p>
-                    <p class="field-data"> {{ data[i].productName }}</p>
+                    <p class="field-data"> {{ data[5] }}</p>
                 </div>
             
                 <div class="field">
                     <p class="field-name">Quantidade:</p>
-                    <p class="field-data"> {{ data[i].quantity }}</p>
+                    <p class="field-data"> {{ data[6] }}</p>
                 </div>
             
                 <div class="field">
                     <p class="field-name">Valor Total da Compra:</p>
-                    <p class="field-data"> {{ data[i].totalPrice }}</p>
+                    <p class="field-data"> {{ data[7] }}</p>
                 </div>
 
                 <div class="field">
                     <p class="field-name">Última atualização:</p>
-                    <p class="field-data"> {{ data[i].lastUpdate }}</p>
+                    <p class="field-data"> {{ data[8] }}</p>
                 </div>
 
             </mat-card>
