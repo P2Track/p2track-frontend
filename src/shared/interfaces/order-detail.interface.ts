@@ -1,4 +1,3 @@
-import { UUID } from "crypto";
 import { EorderStatus } from "../enum/order-status.enum";
 
 export interface IOrderDetail {
