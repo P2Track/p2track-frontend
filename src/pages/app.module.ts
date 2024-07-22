@@ -8,6 +8,8 @@ import { InitialModule } from './initial/initial.module';
 import { HomeOrganizationModule } from './home-organization/home-organization.module';
 import { provideHttpClient } from '@angular/common/http';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -22,7 +24,8 @@ import { provideHttpClient } from '@angular/common/http';
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
+    { provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
