@@ -27,7 +27,6 @@
             "outputPath": "dist/p2track-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "baseHref": "./",
             "polyfills": [
               "zone.js"
             ],
@@ -45,11 +44,7 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "baseHref": "./"
           },
           "configurations": {
             "production": {
@@ -120,3 +115,4 @@
     "analytics": "511487df-d9b9-47d3-80ab-85046e9c645c"
   }
 }
+y
