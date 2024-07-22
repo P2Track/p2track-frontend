@@ -1,6 +1,6 @@
 {
   "name": "p2track-frontend",
-  "homepage": ".",
+  "homepage": "./",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,6 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "build:prod": "ng build --configuration production --base-href /",
     "serve:ssr:p2track-frontend": "node dist/p2track-frontend/server/server.mjs"
   },
   "private": true,
